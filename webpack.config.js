@@ -6,7 +6,7 @@ const srcFolder = path.join(__dirname, '/client/src/');
 
 module.exports = {
   entry: {
-    main: [path.join(srcFolder, '/js/index.jsx')],
+    main: [path.join(srcFolder, 'components/App.jsx')],
   },
   resolve: { extensions: ['.js', '.jsx'] },
   output: {

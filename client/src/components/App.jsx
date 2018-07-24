@@ -1,19 +1,42 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ReceiptReader from './ReceiptReader';
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-
+      friendName: '',
+      friends: [],
     };
+    this.handleFriendChange = this.handleFriendChange.bind(this);
+    this.handleFriendSubmit = this.handleFriendSubmit.bind(this);
+  }
+
+  handleFriendChange(e) {
+    this.setState({ friendName: e.target.value });
+  }
+
+  handleFriendSubmit() {
+    const friendsList = [].concat(this.state.friends);
+    if (this.state.friends.includes(this.state.friendName) === false) {
+      friendsList.push(this.state.friendName);
+      this.setState({ friends: friendsList });
+    }
   }
 
   render() {
     return (
       <div>
         <div>
-          {"Hello it's me!"}
+          {'Better Meal Splitter'}
+        </div>
+        <div>
+          <ReceiptReader
+            friends={this.state.friends}
+            handleFriendChange={this.handleFriendChange}
+            handleFriendSubmit={this.handleFriendSubmit}
+          />
         </div>
       </div>
     );
