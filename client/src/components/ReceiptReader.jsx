@@ -1,16 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types'; // TODO: install prop-types to dependencies
+import PropTypes from 'prop-types';
 
 const ReceiptReader = props => (
   <div>
     <div>
       <input onChange={e => props.handleFriendChange(e)} placeholder="Add friend..." />
-      <div onClick={() => props.handleFriendSubmit()}>
+      <button type="button" onClick={() => props.handleFriendSubmit()}>
         Submit
-      </div>
+      </button>
     </div>
-    <div>
+    <h4>
       {'Manual entry...'}
+    </h4>
+    <div>
       <input placeholder="item" />
       {'$'}
       <input placeholder="price" />
@@ -23,6 +25,9 @@ const ReceiptReader = props => (
           ))
         }
       </select>
+      <button type="button">
+        {'Submit'}
+      </button>
     </div>
 
   </div>
