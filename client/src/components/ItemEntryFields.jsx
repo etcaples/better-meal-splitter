@@ -20,7 +20,7 @@ const ItemEntryFields = (props) => {
         <input placeholder="price" />
         <select>
           {
-            { friends }.map(friend => (
+            friends.map(friend => (
               <option>
                 {friend}
               </option>

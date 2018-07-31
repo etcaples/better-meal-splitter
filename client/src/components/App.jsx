@@ -30,11 +30,11 @@ class App extends React.Component {
 
   handleFriendSubmit() {
     const { friends, friendName } = this.state;
-    const friendsList = [].concat({ friends });
+    const friendsList = [].concat(friends);
     // TODO: only allow normal strings
     // TODO: character max of 20
-    if ({ friends }.includes({ friendName }) === false) {
-      friendsList.push({ friendName });
+    if (friends.includes(friendName) === false) {
+      friendsList.push(friendName);
       this.setState({ friends: friendsList }, () => {
         // reset input to be empty
       });
@@ -79,17 +79,13 @@ class App extends React.Component {
   /* CURRENT FRIEND */
   handleEaterSelect(e) {
     const { currentEaters } = this.state;
-    const newEaters = [].concat({ currentEaters });
+    const newEaters = [].concat(currentEaters);
 
     newEaters.push(e.target.value);
     this.setState({ currentEaters: newEaters });
   }
 
   // on row submit:
-  //   save item-price-friend in state as a row &&
-  //     save item-price-state row in ALL ROWS state
-  //     for each row, render rows
-
   handleRowSubmit() {
     const {
       currentItem,
@@ -97,11 +93,13 @@ class App extends React.Component {
       currentEaters,
       allRows,
     } = this.state;
-    const newRow = [{ currentItem }, { currentPrice }, { currentEaters }];
-
-    const allRowsTemp = [].concat({ allRows });
+    const newRow = [currentItem, currentPrice, currentEaters];
+    //   save item-price-friend in state as a row &&
+    //     save item-price-state row in ALL ROWS state
+    const allRowsTemp = [].concat(allRows);
     allRowsTemp.push(newRow);
     this.setState({ allRows: allRowsTemp });
+    //     for each row, render rows
   }
 
   render() {
