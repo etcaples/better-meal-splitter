@@ -77,13 +77,13 @@ class App extends React.Component {
   }
 
   /* CURRENT FRIEND */
-  handleEaterSelect(e) {
+  handleEaterSelect(selectedEater) {
     const { currentEaters } = this.state;
     const newEaters = [].concat(currentEaters);
 
-    newEaters.push(e.target.value);
+    newEaters.push(selectedEater);
     this.setState({ currentEaters: newEaters }, () => {
-      console.log('HIT');
+      console.log(currentEaters);
     });
   }
 

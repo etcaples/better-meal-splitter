@@ -18,10 +18,10 @@ const ItemEntryFields = (props) => {
         <input placeholder="item" />
         {'$'}
         <input placeholder="price" />
-        <select>
+        <select onChange={e => props.handleEaterSelect(e.target.value)}>
           {
             friends.map(friend => (
-              <option value={friend}>
+              <option>
                 {friend}
               </option>
             ))
