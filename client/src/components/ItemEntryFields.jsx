@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ReceiptReader = props => (
+const ItemEntryFields = props => (
   <div>
     <div>
       <input onChange={e => props.handleFriendChange(e)} placeholder="Add friend..." />
@@ -33,10 +33,10 @@ const ReceiptReader = props => (
   </div>
 );
 
-ReceiptReader.propTypes = {
+ItemEntryFields.propTypes = {
   friends: PropTypes.arrayOf(PropTypes.string).isRequired,
   handleFriendChange: PropTypes.func.isRequired,
   handleFriendSubmit: PropTypes.func.isRequired,
 };
 
-export default ReceiptReader;
+export default ItemEntryFields;

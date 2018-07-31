@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import ReceiptReader from './ReceiptReader';
+import ItemEntryFields from './ItemEntryFields';
 
 // MVP:
 // assign each item to one person
@@ -16,7 +16,7 @@ class App extends React.Component {
       currentItem: '',
       currentPrice: 0,
       currentEaters: [],
-      singleRow: [], // array of currentItem-currentPrice-currentEaters
+      // singleRow: [], // array of currentItem-currentPrice-currentEaters
       allRows: [], // array of arrays
     };
     this.handleFriendChange = this.handleFriendChange.bind(this);
@@ -29,11 +29,12 @@ class App extends React.Component {
   }
 
   handleFriendSubmit() {
-    const friendsList = [].concat(this.state.friends);
+    const { friends, friendName } = this.state;
+    const friendsList = [].concat({ friends });
     // TODO: only allow normal strings
     // TODO: character max of 20
-    if (this.state.friends.includes(this.state.friendName) === false) {
-      friendsList.push(this.state.friendName);
+    if ({ friends }.includes({ friendName }) === false) {
+      friendsList.push({ friendName });
       this.setState({ friends: friendsList }, () => {
         // reset input to be empty
       });
@@ -42,16 +43,10 @@ class App extends React.Component {
 
   /* CURRENT ITEM */
   handleItemChange(e) {
-    this.setState({ item: e.target.value });
+    this.setState({ currentItem: e.target.value });
   }
 
-  // on row submit:
-  //   save item-price-friend in state as a row &&
-  //     save item-price-state row in ALL ROWS state
-  //     for each row, render rows
-
   // sampleData() {
-  //   let that = this;
   //   let sampleDatas = [
   //     ['burger', 15.00, ['Emily', 'Sarah']],
   //     ['salad', 5.00, ['Hailey']],
@@ -75,7 +70,7 @@ class App extends React.Component {
     // only want to allow number inputs
     // 2 decimals only
     if (typeof e.target.value === 'number') {
-      this.setState({ price: e.target.value });
+      this.setState({ currentPrice: e.target.value });
     } else {
       window.alert('Please enter a number');
     }
@@ -83,20 +78,42 @@ class App extends React.Component {
 
   /* CURRENT FRIEND */
   handleEaterSelect(e) {
-    const newEaters = [].concat(this.state.currentEaters);
+    const { currentEaters } = this.state;
+    const newEaters = [].concat({ currentEaters });
+
     newEaters.push(e.target.value);
     this.setState({ currentEaters: newEaters });
   }
 
+  // on row submit:
+  //   save item-price-friend in state as a row &&
+  //     save item-price-state row in ALL ROWS state
+  //     for each row, render rows
+
+  handleRowSubmit() {
+    const {
+      currentItem,
+      currentPrice,
+      currentEaters,
+      allRows,
+    } = this.state;
+    const newRow = [{ currentItem }, { currentPrice }, { currentEaters }];
+
+    const allRowsTemp = [].concat({ allRows });
+    allRowsTemp.push(newRow);
+    this.setState({ allRows: allRowsTemp });
+  }
+
   render() {
+    const { friends } = this.state;
     return (
       <div>
         <h1>
           {'Better Meal Splitter'}
         </h1>
         <div>
-          <ReceiptReader
-            friends={this.state.friends}
+          <ItemEntryFields
+            friends={friends}
             handleFriendChange={this.handleFriendChange}
             handleFriendSubmit={this.handleFriendSubmit}
           />
