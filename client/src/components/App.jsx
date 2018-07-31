@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import ItemEntryFields from './ItemEntryFields';
 
 // MVP:
@@ -21,6 +20,7 @@ class App extends React.Component {
     };
     this.handleFriendChange = this.handleFriendChange.bind(this);
     this.handleFriendSubmit = this.handleFriendSubmit.bind(this);
+    this.handleEaterSelect = this.handleEaterSelect.bind(this);
   }
 
   /* SELECT-DROP */
@@ -82,7 +82,9 @@ class App extends React.Component {
     const newEaters = [].concat(currentEaters);
 
     newEaters.push(e.target.value);
-    this.setState({ currentEaters: newEaters });
+    this.setState({ currentEaters: newEaters }, () => {
+      console.log('HIT');
+    });
   }
 
   // on row submit:
@@ -114,6 +116,7 @@ class App extends React.Component {
             friends={friends}
             handleFriendChange={this.handleFriendChange}
             handleFriendSubmit={this.handleFriendSubmit}
+            handleEaterSelect={this.handleEaterSelect}
           />
         </div>
       </div>
@@ -134,10 +137,5 @@ class App extends React.Component {
 // deploy on heroku -- no db
 // deploy on docker -- no db
 // deploy on aws -- no db
-
-App.propTypes = {
-  friends: PropTypes.arrayOf(PropTypes.string).isRequired,
-  friendName: PropTypes.string.isRequired,
-};
 
 ReactDOM.render(<App />, document.getElementById('app'));

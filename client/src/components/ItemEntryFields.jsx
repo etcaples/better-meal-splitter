@@ -21,7 +21,7 @@ const ItemEntryFields = (props) => {
         <select>
           {
             friends.map(friend => (
-              <option>
+              <option value={friend}>
                 {friend}
               </option>
             ))
