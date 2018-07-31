@@ -82,9 +82,7 @@ class App extends React.Component {
     const newEaters = [].concat(currentEaters);
 
     newEaters.push(selectedEater);
-    this.setState({ currentEaters: newEaters }, () => {
-      console.log(currentEaters);
-    });
+    this.setState({ currentEaters: newEaters });
   }
 
   // on row submit:
