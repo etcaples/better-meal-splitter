@@ -15,12 +15,14 @@ class App extends React.Component {
       currentItem: '',
       currentPrice: 0,
       currentEaters: [],
-      // singleRow: [], // array of currentItem-currentPrice-currentEaters
       allRows: [], // array of arrays
     };
     this.handleFriendChange = this.handleFriendChange.bind(this);
     this.handleFriendSubmit = this.handleFriendSubmit.bind(this);
     this.handleEaterSelect = this.handleEaterSelect.bind(this);
+    this.handleRowSubmit = this.handleRowSubmit.bind(this);
+    this.handlePriceChange = this.handlePriceChange.bind(this);
+    this.handleItemChange = this.handleItemChange.bind(this);
   }
 
   /* SELECT-DROP */
@@ -69,19 +71,18 @@ class App extends React.Component {
   handlePriceChange(e) {
     // only want to allow number inputs
     // 2 decimals only
-    if (typeof e.target.value === 'number') {
-      this.setState({ currentPrice: e.target.value });
-    } else {
-      window.alert('Please enter a number');
-    }
+    this.setState({ currentPrice: e.target.value });
   }
 
   /* CURRENT FRIEND */
   handleEaterSelect(selectedEater) {
     const { currentEaters } = this.state;
     const newEaters = [].concat(currentEaters);
-
-    newEaters.push(selectedEater);
+    // TODO: handle if someone's name is true
+    // TODO: handle if someone selects the placeholder
+    if (newEaters.includes(selectedEater) === false) {
+      newEaters.push(selectedEater);
+    }
     this.setState({ currentEaters: newEaters });
   }
 
@@ -115,6 +116,9 @@ class App extends React.Component {
             handleFriendChange={this.handleFriendChange}
             handleFriendSubmit={this.handleFriendSubmit}
             handleEaterSelect={this.handleEaterSelect}
+            handleRowSubmit={this.handleRowSubmit}
+            handlePriceChange={this.handlePriceChange}
+            handleItemChange={this.handleItemChange}
           />
         </div>
       </div>

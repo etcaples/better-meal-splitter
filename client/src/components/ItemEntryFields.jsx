@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ItemList from './ItemList';
 
 const ItemEntryFields = (props) => {
   const { friends } = props;
@@ -15,10 +16,13 @@ const ItemEntryFields = (props) => {
         {'Manual entry...'}
       </h4>
       <div>
-        <input placeholder="item" />
+        <input placeholder="item" onChange={e => props.handleItemChange(e)} />
         {'$'}
-        <input placeholder="price" />
+        <input placeholder="price" onChange={e => props.handlePriceChange(e)} />
         <select onChange={e => props.handleEaterSelect(e.target.value)}>
+          <option value="1" selected>
+            Choose a consumer
+          </option>
           {
             friends.map(friend => (
               <option>
@@ -27,10 +31,11 @@ const ItemEntryFields = (props) => {
             ))
           }
         </select>
-        <button type="button">
+        <button type="button" onClick={() => props.handleRowSubmit()}>
           {'Submit'}
         </button>
       </div>
+      <ItemList />
     </div>
   );
 };
@@ -39,6 +44,10 @@ ItemEntryFields.propTypes = {
   friends: PropTypes.arrayOf(PropTypes.string).isRequired,
   handleFriendChange: PropTypes.func.isRequired,
   handleFriendSubmit: PropTypes.func.isRequired,
+  handleEaterSelect: PropTypes.func.isRequired,
+  handleRowSubmit: PropTypes.func.isRequired,
+  handlePriceChange: PropTypes.func.isRequired,
+  handleItemChange: PropTypes.func.isRequired,
 };
 
 export default ItemEntryFields;
