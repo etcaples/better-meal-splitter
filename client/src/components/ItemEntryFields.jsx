@@ -2,12 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ItemEntryFields = (props) => {
-  const { friends } = props;
+  const {
+    friends,
+    handleFriendChange,
+    handleFriendSubmit,
+    handleItemChange,
+    handlePriceChange,
+    handleEaterSelect,
+    handleRowSubmit,
+  } = props;
   return (
     <div>
       <div>
-        <input onChange={e => props.handleFriendChange(e)} placeholder="Add friend..." />
-        <button type="button" onClick={() => props.handleFriendSubmit()}>
+        <input onChange={e => handleFriendChange(e)} placeholder="Add friend..." />
+        <button type="button" onClick={() => handleFriendSubmit()}>
           Submit
         </button>
       </div>
@@ -15,10 +23,10 @@ const ItemEntryFields = (props) => {
         {'Manual entry...'}
       </h4>
       <div>
-        <input placeholder="item" onChange={e => props.handleItemChange(e)} />
+        <input placeholder="item" onChange={e => handleItemChange(e)} />
         {'$'}
-        <input placeholder="price" onChange={e => props.handlePriceChange(e)} />
-        <select onChange={e => props.handleEaterSelect(e.target.value)}>
+        <input placeholder="price" onChange={e => handlePriceChange(e)} />
+        <select onChange={e => handleEaterSelect(e.target.value)}>
           <option value="1" selected>
             Choose a consumer
           </option>
@@ -30,7 +38,7 @@ const ItemEntryFields = (props) => {
             ))
           }
         </select>
-        <button type="button" onClick={() => props.handleRowSubmit()}>
+        <button type="button" onClick={() => handleRowSubmit()}>
           {'Submit'}
         </button>
       </div>
