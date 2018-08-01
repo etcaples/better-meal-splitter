@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ItemList from './ItemList';
 
 const ItemEntryFields = (props) => {
   const { friends } = props;
@@ -35,7 +34,6 @@ const ItemEntryFields = (props) => {
           {'Submit'}
         </button>
       </div>
-      <ItemList />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ItemEntryFields from './ItemEntryFields';
+import ItemList from './ItemList';
 
 // MVP:
 // assign each item to one person
@@ -48,7 +49,6 @@ class App extends React.Component {
     this.setState({ currentItem: e.target.value });
   }
 
-  // sampleData() {
   //   let sampleDatas = [
   //     ['burger', 15.00, ['Emily', 'Sarah']],
   //     ['salad', 5.00, ['Hailey']],
@@ -62,7 +62,6 @@ class App extends React.Component {
   //     Hailey: 0,
   //     Eric: 0,
   //   };
-  // }
 
   // on page submit:
   //   calculate the total for each person
@@ -104,7 +103,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { friends } = this.state;
+    const { friends, allRows } = this.state;
     return (
       <div>
         <h1>
@@ -119,6 +118,11 @@ class App extends React.Component {
             handleRowSubmit={this.handleRowSubmit}
             handlePriceChange={this.handlePriceChange}
             handleItemChange={this.handleItemChange}
+          />
+        </div>
+        <div>
+          <ItemList
+            itemDetails={allRows}
           />
         </div>
       </div>
