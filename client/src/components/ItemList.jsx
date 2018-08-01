@@ -8,7 +8,15 @@ const ItemList = (props) => {
       {
         itemDetails.map(([item, price, friends]) => (
           <ul>
-            {item}, {price}, {friends}
+            <span>
+              {item}
+            </span>
+            <span>
+              {price}
+            </span>
+            <span>
+              {friends}
+            </span>
           </ul>))
       }
     </div>
