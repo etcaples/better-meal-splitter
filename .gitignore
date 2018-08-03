@@ -5,4 +5,7 @@
 node_modules/
 
 ##webpack default output folder
-public/compiled/                        
+public/compiled/
+
+#some random file? Maybe from vscode live share plugin
+.vs/

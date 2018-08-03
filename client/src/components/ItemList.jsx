@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ItemList = (props) => {
-  const { itemDetails } = props;
+  const { itemDetails, setTallySubtotals } = props;
   return (
     <div>
       {
@@ -19,12 +19,16 @@ const ItemList = (props) => {
             </span>
           </ul>))
       }
+      <button type="button" onClick={() => setTallySubtotals()}>
+        Confirm Item Details (Get Subtotals)
+      </button>
     </div>
   );
 };
 
 ItemList.propTypes = {
   itemDetails: PropTypes.arrayOf(PropTypes.any).isRequired,
+  setTallySubtotals: PropTypes.func.isRequired,
 };
 
 export default ItemList;

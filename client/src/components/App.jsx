@@ -17,6 +17,7 @@ class App extends React.Component {
       currentPrice: 0,
       currentEaters: [],
       allRows: [], // array of arrays
+      priceTallies: {},
     };
     this.handleFriendChange = this.handleFriendChange.bind(this);
     this.handleFriendSubmit = this.handleFriendSubmit.bind(this);
@@ -24,6 +25,23 @@ class App extends React.Component {
     this.handleRowSubmit = this.handleRowSubmit.bind(this);
     this.handlePriceChange = this.handlePriceChange.bind(this);
     this.handleItemChange = this.handleItemChange.bind(this);
+    this.setTallySubtotals = this.setTallySubtotals.bind(this);
+  }
+
+  setTallySubtotals() { // on item details confirmation
+    const { allRows, priceTallies } = this.state;
+    const priceTalliesTemp = Object.assign({}, priceTallies);
+    for (let i = 0; i < allRows.length; i += 1) {
+      const friendsArr = allRows[i][2];
+      for (let k = 0; k < friendsArr.length; k += 1) {
+        if (priceTalliesTemp[friendsArr[k]] === undefined) {
+          priceTalliesTemp[friendsArr[k]] = 0;
+        }
+        priceTalliesTemp[friendsArr[k]] += allRows[i][1] / friendsArr.length;
+      }
+    }
+
+    this.setState({ priceTallies: priceTalliesTemp });
   }
 
   /* SELECT-DROP */
@@ -85,7 +103,6 @@ class App extends React.Component {
     this.setState({ currentEaters: newEaters });
   }
 
-  // on row submit:
   handleRowSubmit() {
     const {
       currentItem,
@@ -94,12 +111,9 @@ class App extends React.Component {
       allRows,
     } = this.state;
     const newRow = [currentItem, currentPrice, currentEaters];
-    //   save item-price-friend in state as a row &&
-    //     save item-price-state row in ALL ROWS state
     const allRowsTemp = [].concat(allRows);
     allRowsTemp.push(newRow);
     this.setState({ allRows: allRowsTemp });
-    //     for each row, render rows
   }
 
   render() {
@@ -123,6 +137,7 @@ class App extends React.Component {
         <div>
           <ItemList
             itemDetails={allRows}
+            setTallySubtotals={this.setTallySubtotals}
           />
         </div>
       </div>
