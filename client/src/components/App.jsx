@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ItemEntryFields from './ItemEntryFields';
 import ItemList from './ItemList';
+import SubtotalList from './SubtotalList';
 
 // MVP:
 // assign each item to one person
@@ -117,7 +118,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { friends, allRows } = this.state;
+    const { friends, allRows, priceTallies } = this.state;
     return (
       <div>
         <h1>
@@ -138,6 +139,11 @@ class App extends React.Component {
           <ItemList
             itemDetails={allRows}
             setTallySubtotals={this.setTallySubtotals}
+          />
+        </div>
+        <div>
+          <SubtotalList
+            priceTallies={priceTallies}
           />
         </div>
       </div>
