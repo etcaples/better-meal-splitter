@@ -12,7 +12,7 @@ const ItemList = (props) => {
               {item}
             </span>
             <span>
-              {price}
+              {`$${price}`}
             </span>
             <span>
               {friends}

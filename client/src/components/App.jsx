@@ -19,6 +19,9 @@ class App extends React.Component {
       currentEaters: [],
       allRows: [], // array of arrays
       priceTallies: {},
+      tax: 0,
+      tip: 0,
+      total: 0,
     };
     this.handleFriendChange = this.handleFriendChange.bind(this);
     this.handleFriendSubmit = this.handleFriendSubmit.bind(this);
@@ -27,6 +30,10 @@ class App extends React.Component {
     this.handlePriceChange = this.handlePriceChange.bind(this);
     this.handleItemChange = this.handleItemChange.bind(this);
     this.setTallySubtotals = this.setTallySubtotals.bind(this);
+    this.getTax = this.getTax.bind(this);
+    this.getTip = this.getTip.bind(this);
+    this.combineTaxTip = this.combineTaxTip.bind(this);
+    console.log('app this', this);
   }
 
   setTallySubtotals() { // on item details confirmation
@@ -41,7 +48,6 @@ class App extends React.Component {
         priceTalliesTemp[friendsArr[k]] += allRows[i][1] / friendsArr.length;
       }
     }
-
     this.setState({ priceTallies: priceTalliesTemp });
   }
 
@@ -110,15 +116,41 @@ class App extends React.Component {
       currentPrice,
       currentEaters,
       allRows,
+      total,
     } = this.state;
     const newRow = [currentItem, currentPrice, currentEaters];
     const allRowsTemp = [].concat(allRows);
+    const newTotal = total + currentPrice;
     allRowsTemp.push(newRow);
-    this.setState({ allRows: allRowsTemp });
+    this.setState({ allRows: allRowsTemp, total: newTotal }); // also set state of total
+  }
+
+  getTax(e) {
+    if (e.target.value !== undefined) {
+      this.setState({ tax: e.target.value });
+    }
+  }
+
+  getTip(e) {
+    if (e.target.value !== undefined) {
+      this.setState({ tip: e.target.value });
+    }
+  }
+
+  combineTaxTip() {
+    const { tax, tip, total } = this.state;
+    const productionTotal = total + tax + tip;
+    this.setState({ total: productionTotal });
   }
 
   render() {
-    const { friends, allRows, priceTallies } = this.state;
+    const {
+      friends,
+      allRows,
+      priceTallies,
+      getTax,
+      getTip,
+    } = this.state;
     return (
       <div>
         <h1>
@@ -144,6 +176,8 @@ class App extends React.Component {
         <div>
           <SubtotalList
             priceTallies={priceTallies}
+            getTax={getTax}
+            getTip={getTip}
           />
         </div>
       </div>
