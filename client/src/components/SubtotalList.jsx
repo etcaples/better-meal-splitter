@@ -3,8 +3,12 @@ import PropTypes from 'prop-types';
 import TipTaxInputs from './TipTaxInputs';
 
 const SubtotalList = (props) => {
-  console.log(this);
-  const { priceTallies } = props;
+  const {
+    priceTallies,
+    getTax,
+    getTip,
+    combineTaxTip,
+  } = props;
   return (
     <div>
       {
@@ -16,7 +20,11 @@ const SubtotalList = (props) => {
           </div>))
       }
       <div>
-        <TipTaxInputs />
+        <TipTaxInputs
+          getTax={getTax}
+          getTip={getTip}
+          combineTaxTip={combineTaxTip}
+        />
       </div>
     </div>
   );
@@ -24,6 +32,9 @@ const SubtotalList = (props) => {
 
 SubtotalList.propTypes = {
   priceTallies: PropTypes.objectOf(PropTypes.number).isRequired,
+  getTax: PropTypes.func.isRequired,
+  getTip: PropTypes.func.isRequired,
+  combineTaxTip: PropTypes.func.isRequired,
 };
 
 export default SubtotalList;

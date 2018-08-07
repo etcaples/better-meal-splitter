@@ -150,6 +150,7 @@ class App extends React.Component {
       priceTallies,
       getTax,
       getTip,
+      combineTaxTip,
     } = this.state;
     return (
       <div>
@@ -178,6 +179,7 @@ class App extends React.Component {
             priceTallies={priceTallies}
             getTax={getTax}
             getTip={getTip}
+            combineTaxTip={combineTaxTip}
           />
         </div>
       </div>
