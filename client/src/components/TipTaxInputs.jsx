@@ -10,10 +10,10 @@ const TaxTipInputs = (props) => {
   return (
     <div>
       <div>
-        <input onChange={() => getTax()} placeholder="add tax & other fees..." />
+        <input onChange={e => getTax(e)} placeholder="add tax & other fees..." />
       </div>
       <div>
-        <input onChange={() => getTip()} placeholder="add tip..." />
+        <input onChange={e => getTip(e)} placeholder="add tip..." />
       </div>
       <div>
         <button onClick={() => combineTaxTip()} type="button">
@@ -24,10 +24,10 @@ const TaxTipInputs = (props) => {
   );
 };
 
-TaxTipInputs.propTypes = {
-  getTax: PropTypes.func.isRequired,
-  getTip: PropTypes.func.isRequired,
-  combineTaxTip: PropTypes.func.isRequired,
-};
+// TaxTipInputs.propTypes = {
+  // getTax: PropTypes.func.isRequired,
+  // getTip: PropTypes.func.isRequired,
+  // combineTaxTip: PropTypes.func.isRequired,
+// };
 
 export default TaxTipInputs;

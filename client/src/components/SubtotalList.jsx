@@ -32,9 +32,9 @@ const SubtotalList = (props) => {
 
 SubtotalList.propTypes = {
   priceTallies: PropTypes.objectOf(PropTypes.number).isRequired,
-  getTax: PropTypes.func.isRequired,
-  getTip: PropTypes.func.isRequired,
-  combineTaxTip: PropTypes.func.isRequired,
+  // getTax: PropTypes.func.isRequired,
+  // getTip: PropTypes.func.isRequired,
+  // combineTaxTip: PropTypes.func.isRequired,
 };
 
 export default SubtotalList;

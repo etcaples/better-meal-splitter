@@ -33,7 +33,6 @@ class App extends React.Component {
     this.getTax = this.getTax.bind(this);
     this.getTip = this.getTip.bind(this);
     this.combineTaxTip = this.combineTaxTip.bind(this);
-    console.log('app this', this);
   }
 
   setTallySubtotals() { // on item details confirmation
@@ -49,6 +48,15 @@ class App extends React.Component {
       }
     }
     this.setState({ priceTallies: priceTalliesTemp });
+  }
+
+  getTip(e) {
+    this.setState({ tip: parseInt(e.target.value) });
+  }
+
+
+  getTax(e) {
+    this.setState({ tax: parseInt(e.target.value) });
   }
 
   /* SELECT-DROP */
@@ -95,7 +103,7 @@ class App extends React.Component {
   handlePriceChange(e) {
     // only want to allow number inputs
     // 2 decimals only
-    this.setState({ currentPrice: e.target.value });
+    this.setState({ currentPrice: parseInt(e.target.value) });
   }
 
   /* CURRENT FRIEND */
@@ -125,22 +133,22 @@ class App extends React.Component {
     this.setState({ allRows: allRowsTemp, total: newTotal }); // also set state of total
   }
 
-  getTax(e) {
-    if (e.target.value !== undefined) {
-      this.setState({ tax: e.target.value });
-    }
-  }
-
-  getTip(e) {
-    if (e.target.value !== undefined) {
-      this.setState({ tip: e.target.value });
-    }
-  }
-
   combineTaxTip() {
     const { tax, tip, total } = this.state;
-    const productionTotal = total + tax + tip;
-    this.setState({ total: productionTotal });
+    console.log('typeof: ', typeof tax);
+    console.log('tax: ', tax);
+    console.log('total: ', total);
+    let productionTotal = total;
+    if (tax !== undefined) {
+      productionTotal += tax;
+    }
+    if (tip !== undefined) {
+      productionTotal += tip;
+    }
+    this.setState({ total: productionTotal }, () => {
+      console.log('HIT');
+      console.log('total: ', this.state.total);
+    });
   }
 
   render() {
@@ -177,9 +185,9 @@ class App extends React.Component {
         <div>
           <SubtotalList
             priceTallies={priceTallies}
-            getTax={getTax}
-            getTip={getTip}
-            combineTaxTip={combineTaxTip}
+            getTax={this.getTax}
+            getTip={this.getTip}
+            combineTaxTip={this.combineTaxTip}
           />
         </div>
       </div>
