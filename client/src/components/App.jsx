@@ -50,6 +50,8 @@ class App extends React.Component {
     this.setState({ priceTallies: priceTalliesTemp });
   }
 
+  // TODO: add a feature for custom tip flat rates and percentages,
+  // for reading the tip off the final receipt, for standard 18% or 20%
   getTip(e) {
     this.setState({ tip: parseInt(e.target.value) });
   }
@@ -133,22 +135,16 @@ class App extends React.Component {
     this.setState({ allRows: allRowsTemp, total: newTotal }); // also set state of total
   }
 
-  combineTaxTip() {
+  combineTaxTip() { // on click for Finalize Tax/Tip
     const { tax, tip, total } = this.state;
-    console.log('typeof: ', typeof tax);
-    console.log('tax: ', tax);
-    console.log('total: ', total);
     let productionTotal = total;
-    if (tax !== undefined) {
+    if (tax >= 0) {
       productionTotal += tax;
     }
-    if (tip !== undefined) {
+    if (tip >= 0) {
       productionTotal += tip;
     }
-    this.setState({ total: productionTotal }, () => {
-      console.log('HIT');
-      console.log('total: ', this.state.total);
-    });
+    this.setState({ total: productionTotal });
   }
 
   render() {
@@ -156,9 +152,6 @@ class App extends React.Component {
       friends,
       allRows,
       priceTallies,
-      getTax,
-      getTip,
-      combineTaxTip,
     } = this.state;
     return (
       <div>

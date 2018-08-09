@@ -24,10 +24,10 @@ const TaxTipInputs = (props) => {
   );
 };
 
-// TaxTipInputs.propTypes = {
-  // getTax: PropTypes.func.isRequired,
-  // getTip: PropTypes.func.isRequired,
-  // combineTaxTip: PropTypes.func.isRequired,
-// };
+TaxTipInputs.propTypes = {
+  getTax: PropTypes.func.isRequired,
+  getTip: PropTypes.func.isRequired,
+  combineTaxTip: PropTypes.func.isRequired,
+};
 
 export default TaxTipInputs;
