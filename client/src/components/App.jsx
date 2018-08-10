@@ -21,7 +21,9 @@ class App extends React.Component {
       priceTallies: {},
       tax: 0,
       tip: 0,
+      subtotal: 0,
       total: 0,
+      percentages: {},
     };
     this.handleFriendChange = this.handleFriendChange.bind(this);
     this.handleFriendSubmit = this.handleFriendSubmit.bind(this);
@@ -33,32 +35,53 @@ class App extends React.Component {
     this.getTax = this.getTax.bind(this);
     this.getTip = this.getTip.bind(this);
     this.combineTaxTip = this.combineTaxTip.bind(this);
+    this.setIndivPercentages = this.setIndivPercentages.bind(this);
   }
 
   setTallySubtotals() { // on item details confirmation
-    const { allRows, priceTallies } = this.state;
+    const { allRows, priceTallies, percentages } = this.state;
     const priceTalliesTemp = Object.assign({}, priceTallies);
+    const percentagesTemp = Object.assign({}, percentages); // empty object
+
     for (let i = 0; i < allRows.length; i += 1) {
       const friendsArr = allRows[i][2];
       for (let k = 0; k < friendsArr.length; k += 1) {
         if (priceTalliesTemp[friendsArr[k]] === undefined) {
           priceTalliesTemp[friendsArr[k]] = 0;
+          percentagesTemp[friendsArr[k]] = 0;
         }
         priceTalliesTemp[friendsArr[k]] += allRows[i][1] / friendsArr.length;
       }
     }
-    this.setState({ priceTallies: priceTalliesTemp });
+    this.setState({ priceTallies: priceTalliesTemp, percentages: percentagesTemp });
   }
 
   // TODO: add a feature for custom tip flat rates and percentages,
-  // for reading the tip off the final receipt, for standard 18% or 20%
+  // ffor reading the tip off the final receipt, for standard 18% or 20%
   getTip(e) {
-    this.setState({ tip: parseInt(e.target.value) });
+    this.setState({ tip: parseInt(e.target.value, 10) });
   }
 
 
   getTax(e) {
-    this.setState({ tax: parseInt(e.target.value) });
+    this.setState({ tax: parseInt(e.target.value, 10) });
+  }
+
+
+  setIndivPercentages() {
+    const {
+      percentages,
+      friends,
+      priceTallies,
+      subtotal,
+    } = this.state;
+    const newPercentages = Object.assign({}, percentages);
+    for (let i = 0; i < friends.length; i += 1) {
+      newPercentages[friends[i]] = priceTallies[friends[i]] / subtotal;
+    }
+    this.setState({ percentages: newPercentages });
+    // for each person in friends arr
+    //   calculate the percentage of the total they should pay
   }
 
   /* SELECT-DROP */
@@ -105,14 +128,14 @@ class App extends React.Component {
   handlePriceChange(e) {
     // only want to allow number inputs
     // 2 decimals only
-    this.setState({ currentPrice: parseInt(e.target.value) });
+    this.setState({ currentPrice: parseInt(e.target.value, 10) });
   }
 
   /* CURRENT FRIEND */
   handleEaterSelect(selectedEater) {
     const { currentEaters } = this.state;
     const newEaters = [].concat(currentEaters);
-    // TODO: handle if someone's name is true
+    // TODO: handle if someone's name is 'True'
     // TODO: handle if someone selects the placeholder
     if (newEaters.includes(selectedEater) === false) {
       newEaters.push(selectedEater);
@@ -126,25 +149,28 @@ class App extends React.Component {
       currentPrice,
       currentEaters,
       allRows,
-      total,
+      subtotal,
     } = this.state;
     const newRow = [currentItem, currentPrice, currentEaters];
     const allRowsTemp = [].concat(allRows);
-    const newTotal = total + currentPrice;
+    const newSubtotal = subtotal + currentPrice;
     allRowsTemp.push(newRow);
-    this.setState({ allRows: allRowsTemp, total: newTotal }); // also set state of total
+    this.setState({ allRows: allRowsTemp, subtotal: newSubtotal }); // also set state of total
   }
 
   combineTaxTip() { // on click for Finalize Tax/Tip
-    const { tax, tip, total } = this.state;
-    let productionTotal = total;
+    const { tax, tip, subtotal } = this.state;
+    let newTotal = subtotal;
     if (tax >= 0) {
-      productionTotal += tax;
+      newTotal += tax;
     }
     if (tip >= 0) {
-      productionTotal += tip;
+      newTotal += tip;
     }
-    this.setState({ total: productionTotal });
+    this.setState({ total: newTotal }, () => {
+      this.setIndivPercentages();
+    });
+    // on submit, render percentages
   }
 
   render() {
