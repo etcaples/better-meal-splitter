@@ -22,12 +22,12 @@ const TaxTipInputs = (props) => {
         </button>
         <div>
           {
-            Object.keys(totalAmounts).map((person, index) => {
+            Object.keys(totalAmounts).map((person) => {
               let count = 0;
               count += 1;
               return (
                 <ul key={count}>
-                  {`${person}: $${totalAmounts[person].toFixed(2)}`}
+                  {`${person}: $${totalAmounts[person]}`}
                 </ul>);
             })
           }

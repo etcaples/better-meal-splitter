@@ -152,7 +152,7 @@ class App extends React.Component {
     const consumers = Object.keys(percentages);
     for (let i = 0; i < consumers.length; i++) {
       const percentage = percentages[consumers[i]];
-      newTotalAmounts[consumers[i]] = percentage * total;
+      newTotalAmounts[consumers[i]] = (percentage * total).toFixed(2);
     }
     this.setState({ totalAmounts: newTotalAmounts });
   }
