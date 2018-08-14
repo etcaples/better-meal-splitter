@@ -8,6 +8,7 @@ const SubtotalList = (props) => {
     getTax,
     getTip,
     combineTaxTip,
+    totalAmounts,
   } = props;
   return (
     <div>
@@ -15,7 +16,7 @@ const SubtotalList = (props) => {
         Object.keys(priceTallies).map(priceTallyKey => (
           <div>
             <ul>
-              {`${priceTallyKey}: $${priceTallies[priceTallyKey]}`}
+              {`${priceTallyKey}: $${priceTallies[priceTallyKey].toFixed(2)}`}
             </ul>
           </div>))
       }
@@ -24,6 +25,7 @@ const SubtotalList = (props) => {
           getTax={getTax}
           getTip={getTip}
           combineTaxTip={combineTaxTip}
+          totalAmounts={totalAmounts}
         />
       </div>
     </div>
@@ -35,6 +37,7 @@ SubtotalList.propTypes = {
   getTax: PropTypes.func.isRequired,
   getTip: PropTypes.func.isRequired,
   combineTaxTip: PropTypes.func.isRequired,
+  totalAmounts: PropTypes.instanceOf(PropTypes.object).isRequired,
 };
 
 export default SubtotalList;

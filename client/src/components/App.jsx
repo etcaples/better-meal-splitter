@@ -24,6 +24,7 @@ class App extends React.Component {
       subtotal: 0,
       total: 0,
       percentages: {},
+      totalAmounts: {},
     };
     this.handleFriendChange = this.handleFriendChange.bind(this);
     this.handleFriendSubmit = this.handleFriendSubmit.bind(this);
@@ -36,6 +37,7 @@ class App extends React.Component {
     this.getTip = this.getTip.bind(this);
     this.combineTaxTip = this.combineTaxTip.bind(this);
     this.setIndivPercentages = this.setIndivPercentages.bind(this);
+    this.handlePageSubmit = this.handlePageSubmit.bind(this);
   }
 
   setTallySubtotals() { // on item details confirmation
@@ -43,9 +45,9 @@ class App extends React.Component {
     const priceTalliesTemp = Object.assign({}, priceTallies);
     const percentagesTemp = Object.assign({}, percentages); // empty object
 
-    for (let i = 0; i < allRows.length; i += 1) {
+    for (let i = 0; i < allRows.length; i++) {
       const friendsArr = allRows[i][2];
-      for (let k = 0; k < friendsArr.length; k += 1) {
+      for (let k = 0; k < friendsArr.length; k++) {
         if (priceTalliesTemp[friendsArr[k]] === undefined) {
           priceTalliesTemp[friendsArr[k]] = 0;
           percentagesTemp[friendsArr[k]] = 0;
@@ -76,12 +78,12 @@ class App extends React.Component {
       subtotal,
     } = this.state;
     const newPercentages = Object.assign({}, percentages);
-    for (let i = 0; i < friends.length; i += 1) {
+    for (let i = 0; i < friends.length; i++) {
       newPercentages[friends[i]] = priceTallies[friends[i]] / subtotal;
     }
-    this.setState({ percentages: newPercentages });
-    // for each person in friends arr
-    //   calculate the percentage of the total they should pay
+    this.setState({ percentages: newPercentages }, () => {
+      this.handlePageSubmit();
+    });
   }
 
   /* SELECT-DROP */
@@ -143,6 +145,18 @@ class App extends React.Component {
     this.setState({ currentEaters: newEaters });
   }
 
+  handlePageSubmit() {
+    // render dollar amounts per person:
+    const { percentages, total, totalAmounts } = this.state;
+    const newTotalAmounts = Object.assign({}, totalAmounts);
+    const consumers = Object.keys(percentages);
+    for (let i = 0; i < consumers.length; i++) {
+      const percentage = percentages[consumers[i]];
+      newTotalAmounts[consumers[i]] = percentage * total;
+    }
+    this.setState({ totalAmounts: newTotalAmounts });
+  }
+
   handleRowSubmit() {
     const {
       currentItem,
@@ -170,7 +184,6 @@ class App extends React.Component {
     this.setState({ total: newTotal }, () => {
       this.setIndivPercentages();
     });
-    // on submit, render percentages
   }
 
   render() {
@@ -178,6 +191,7 @@ class App extends React.Component {
       friends,
       allRows,
       priceTallies,
+      totalAmounts,
     } = this.state;
     return (
       <div>
@@ -207,6 +221,7 @@ class App extends React.Component {
             getTax={this.getTax}
             getTip={this.getTip}
             combineTaxTip={this.combineTaxTip}
+            totalAmounts={totalAmounts}
           />
         </div>
       </div>

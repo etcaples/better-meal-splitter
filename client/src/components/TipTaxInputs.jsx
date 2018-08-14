@@ -6,6 +6,7 @@ const TaxTipInputs = (props) => {
     getTax,
     getTip,
     combineTaxTip,
+    totalAmounts,
   } = props;
   return (
     <div>
@@ -19,6 +20,18 @@ const TaxTipInputs = (props) => {
         <button onClick={() => combineTaxTip()} type="button">
           Finalize Tax/Tip
         </button>
+        <div>
+          {
+            Object.keys(totalAmounts).map((person, index) => {
+              let count = 0;
+              count += 1;
+              return (
+                <ul key={count}>
+                  {`${person}: $${totalAmounts[person].toFixed(2)}`}
+                </ul>);
+            })
+          }
+        </div>
       </div>
     </div>
   );
@@ -28,6 +41,7 @@ TaxTipInputs.propTypes = {
   getTax: PropTypes.func.isRequired,
   getTip: PropTypes.func.isRequired,
   combineTaxTip: PropTypes.func.isRequired,
+  totalAmounts: PropTypes.instanceOf(PropTypes.object).isRequired,
 };
 
 export default TaxTipInputs;
