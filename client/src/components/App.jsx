@@ -169,7 +169,11 @@ class App extends React.Component {
     const allRowsTemp = [].concat(allRows);
     const newSubtotal = subtotal + currentPrice;
     allRowsTemp.push(newRow);
-    this.setState({ allRows: allRowsTemp, subtotal: newSubtotal }); // also set state of total
+    this.setState({
+      allRows: allRowsTemp,
+      subtotal: newSubtotal,
+      currentEaters: [],
+    }); // also set state of total
   }
 
   combineTaxTip() { // on click for Finalize Tax/Tip
