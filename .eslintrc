@@ -1,6 +1,6 @@
 {
   "parser": "babel-eslint",
-  "plugins": ["react", "import", "jsx-a11y"],
+  "plugins": ["react", "import", "jsx-a11y", "mocha"],
   "env": {
     "browser": true,
     "node": true,
@@ -8,7 +8,8 @@
   },
   "rules": {
     "react/prop-types": [2],
-    "no-plusplus": [2, { "allowForLoopAfterthoughts": true }]
+    "no-plusplus": [2, { "allowForLoopAfterthoughts": true }],
+    "mocha/no-exclusive-tests": "error"
   },
   "extends": ["airbnb"]
 }

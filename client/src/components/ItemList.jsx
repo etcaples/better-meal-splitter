@@ -5,20 +5,37 @@ const ItemList = (props) => {
   const { itemDetails, setTallySubtotals } = props;
   return (
     <div>
-      {
-        itemDetails.map(([item, price, friends]) => (
-          <ul>
-            <span>
-              {item}
-            </span>
-            <span>
-              {`$${price}`}
-            </span>
-            <span>
-              {friends}
-            </span>
-          </ul>))
-      }
+      <table>
+        <tr>
+          <th>
+            Item
+          </th>
+          <th>
+            Price
+          </th>
+          <th>
+            Friends
+          </th>
+        </tr>
+        {
+          itemDetails.map(([item, price, friends]) => (
+            <tr>
+              <td>
+                {item}
+              </td>
+              <td>
+                {`$${price}`}
+              </td>
+              <td>
+                {friends.map(friend => (
+                  <p>
+                    {friend}
+                  </p>
+                ))}
+              </td>
+            </tr>))
+        }
+      </table>
       <button type="button" onClick={() => setTallySubtotals()}>
         Confirm Item Details (Get Subtotals)
       </button>

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon index.js",
     "dev": "webpack -d --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha ./client/spec/"
   },
   "repository": {
     "type": "git",
