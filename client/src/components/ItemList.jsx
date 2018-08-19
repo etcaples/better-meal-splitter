@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ItemList = (props) => {
-  const { itemDetails, setTallySubtotals } = props;
+  const { itemDetails, setTallySubtotals, removeItemRow } = props;
   return (
     <div>
       <table>
@@ -33,6 +33,11 @@ const ItemList = (props) => {
                   </p>
                 ))}
               </td>
+              <td>
+                <button type="button" onClick={() => removeItemRow([item, price, friends])}>
+                  Remove
+                </button>
+              </td>
             </tr>))
         }
       </table>
@@ -46,6 +51,7 @@ const ItemList = (props) => {
 ItemList.propTypes = {
   itemDetails: PropTypes.arrayOf(PropTypes.any).isRequired,
   setTallySubtotals: PropTypes.func.isRequired,
+  removeItemRow: PropTypes.func.isRequired,
 };
 
 export default ItemList;

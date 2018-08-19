@@ -38,6 +38,7 @@ class App extends React.Component {
     this.combineTaxTip = this.combineTaxTip.bind(this);
     this.setIndivPercentages = this.setIndivPercentages.bind(this);
     this.handlePageSubmit = this.handlePageSubmit.bind(this);
+    this.removeItemRow = this.removeItemRow.bind(this);
   }
 
   setTallySubtotals() { // on item details confirmation
@@ -190,6 +191,18 @@ class App extends React.Component {
     });
   }
 
+  removeItemRow(row) {
+    const { allRows } = this.state;
+    const remainingRows = [].concat(allRows);
+    for (let i = 0; i < remainingRows.length; i++) {
+      const thisRow = remainingRows[i];
+      if (row[0] === thisRow[0] && row[1] === thisRow[1] && row[2] === thisRow[2]) {
+        remainingRows.splice(i, 1);
+      }
+    }
+    this.setState({ allRows: remainingRows });
+  }
+
   render() {
     const {
       friends,
@@ -200,7 +213,7 @@ class App extends React.Component {
     return (
       <div>
         <h1>
-          {'Better Meal Splitter'}
+          {'SplitMeal'}
         </h1>
         <div>
           <ItemEntryFields
@@ -217,6 +230,7 @@ class App extends React.Component {
           <ItemList
             itemDetails={allRows}
             setTallySubtotals={this.setTallySubtotals}
+            removeItemRow={this.removeItemRow}
           />
         </div>
         <div>
