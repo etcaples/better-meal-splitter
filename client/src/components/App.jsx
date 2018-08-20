@@ -192,6 +192,7 @@ class App extends React.Component {
   }
 
   removeItemRow(row) {
+    // change the total prices and the prices per person
     const { allRows } = this.state;
     const remainingRows = [].concat(allRows);
     for (let i = 0; i < remainingRows.length; i++) {
