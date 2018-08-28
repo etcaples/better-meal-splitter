@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import ItemEntryFields from './ItemEntryFields';
 import ItemList from './ItemList';
 import SubtotalList from './SubtotalList';
+import '../css/main.css';
 
 // MVP:
 // assign each item to one person
@@ -212,7 +213,7 @@ class App extends React.Component {
       totalAmounts,
     } = this.state;
     return (
-      <div>
+      <div className="app-body">
         <h1>
           {'SplitMeal'}
         </h1>
