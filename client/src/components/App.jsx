@@ -110,21 +110,6 @@ class App extends React.Component {
   handleItemChange(e) {
     this.setState({ currentItem: e.target.value });
   }
-
-  //   let sampleDatas = [
-  //     ['burger', 15.00, ['Emily', 'Sarah']],
-  //     ['salad', 5.00, ['Hailey']],
-  //     ['treats', 4.00, ['Emily']],
-  //     ['snax', 5.00, ['Emily']],
-  //   ];
-
-  //   let priceTotals = {
-  //     Emily: 0,
-  //     Sarah: 0,
-  //     Hailey: 0,
-  //     Eric: 0,
-  //   };
-
   // on page submit:
   //   calculate the total for each person
 

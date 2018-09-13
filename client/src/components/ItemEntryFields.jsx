@@ -13,7 +13,7 @@ const ItemEntryFields = (props) => {
   } = props;
   return (
     <div>
-      <div>
+      <div className="friend-add-div">
         <input onChange={e => handleFriendChange(e)} placeholder="Add friend..." />
         <button type="button" onClick={() => handleFriendSubmit()}>
           Submit
