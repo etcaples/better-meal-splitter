@@ -8,7 +8,7 @@ const ItemEntryFields = (props) => {
     handleFriendSubmit,
     handleItemChange,
     handlePriceChange,
-    handleEaterSelect,
+    // handleEaterSelect,
     handleRowSubmit,
   } = props;
   return (
@@ -26,22 +26,24 @@ const ItemEntryFields = (props) => {
         <input placeholder="item" onChange={e => handleItemChange(e)} />
         {'$'}
         <input placeholder="price" onChange={e => handlePriceChange(e)} />
-        <select onChange={e => handleEaterSelect(e.target.value)}>
-          <option value="1" selected>
-            Choose a consumer
-          </option>
+        {/* <select onChange={e => handleEaterSelect(e.target.value)}> */}
+        <div>
           {
             friends.map(friend => (
-              <option>
-                {friend}
-              </option>
+              <span>
+                <input type="checkbox" key={friend} />
+                <label htmlFor={friend}>
+                  {friend}
+                </label>
+              </span>
             ))
           }
-        </select>
-        <button type="button" onClick={() => handleRowSubmit()}>
-          {'Submit'}
-        </button>
+        </div>
+        {/* </select> */}
       </div>
+      <button type="button" onClick={() => handleRowSubmit()}>
+        {'Submit'}
+      </button>
     </div>
   );
 };
@@ -50,7 +52,7 @@ ItemEntryFields.propTypes = {
   friends: PropTypes.arrayOf(PropTypes.string).isRequired,
   handleFriendChange: PropTypes.func.isRequired,
   handleFriendSubmit: PropTypes.func.isRequired,
-  handleEaterSelect: PropTypes.func.isRequired,
+  // handleEaterSelect: PropTypes.func.isRequired,
   handleRowSubmit: PropTypes.func.isRequired,
   handlePriceChange: PropTypes.func.isRequired,
   handleItemChange: PropTypes.func.isRequired,
