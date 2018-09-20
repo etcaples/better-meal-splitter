@@ -41,9 +41,11 @@ const ItemEntryFields = (props) => {
         </div>
         {/* </select> */}
       </div>
-      <button type="button" onClick={() => handleRowSubmit()}>
-        {'Submit'}
-      </button>
+      <div>
+        <button type="button" onClick={() => handleRowSubmit()}>
+          {'Submit'}
+        </button>
+      </div>
     </div>
   );
 };
