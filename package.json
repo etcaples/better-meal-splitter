@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "Fair cost-share for meals, includes tax & tip",
   "main": "index.js",
+  "files": [
+    "public/main.js",
+    "punlic/main.css",
+    "public/index.html"
+  ],
   "scripts": {
     "start": "nodemon index.js",
     "dev": "webpack -d --watch",
