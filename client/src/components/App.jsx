@@ -5,20 +5,16 @@ import ItemList from './ItemList';
 import SubtotalList from './SubtotalList';
 import '../css/main.css';
 
-// MVP:
-// assign each item to one person
-// then create a tally at the bottom of the page
-
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       friendName: '', // the friend to add to select drop
-      friends: [], // all friends, to render select drop
+      friends: [], // all friends, to render checkboxes
       currentItem: '',
       currentPrice: 0,
       currentEaters: [],
-      allRows: [], // array of arrays
+      allRows: [], // array of arrays TODO: change to array of objects
       priceTallies: {},
       tax: 0,
       tip: 0,
@@ -60,17 +56,13 @@ class App extends React.Component {
     this.setState({ priceTallies: priceTalliesTemp, percentages: percentagesTemp });
   }
 
-  // TODO: add a feature for custom tip flat rates and percentages,
-  // ffor reading the tip off the final receipt, for standard 18% or 20%
   getTip(e) {
     this.setState({ tip: parseInt(e.target.value, 10) });
   }
 
-
   getTax(e) {
     this.setState({ tax: parseInt(e.target.value, 10) });
   }
-
 
   setIndivPercentages() {
     const {
@@ -96,8 +88,6 @@ class App extends React.Component {
   handleFriendSubmit() {
     const { friends, friendName } = this.state;
     const friendsList = [].concat(friends);
-    // TODO: only allow normal strings
-    // TODO: character max of 20
     if (friends.includes(friendName) === false) {
       friendsList.push(friendName);
       this.setState({ friends: friendsList }, () => {
@@ -115,8 +105,6 @@ class App extends React.Component {
 
   /* CURRENT PRICE */
   handlePriceChange(e) {
-    // only want to allow number inputs
-    // 2 decimals only
     this.setState({ currentPrice: parseInt(e.target.value, 10) });
   }
 
@@ -124,8 +112,6 @@ class App extends React.Component {
   handleEaterSelect(selectedEater) {
     const { currentEaters } = this.state;
     const newEaters = [].concat(currentEaters);
-    // TODO: handle if someone's name is 'True'
-    // TODO: handle if someone selects the placeholder
     if (newEaters.includes(selectedEater) === false) {
       newEaters.push(selectedEater);
     }
@@ -133,7 +119,7 @@ class App extends React.Component {
   }
 
   handlePageSubmit() {
-    // render dollar amounts per person:
+    // renders dollar amounts per person:
     const { percentages, total, totalAmounts } = this.state;
     const newTotalAmounts = Object.assign({}, totalAmounts);
     const consumers = Object.keys(percentages);
@@ -160,7 +146,7 @@ class App extends React.Component {
       allRows: allRowsTemp,
       subtotal: newSubtotal,
       currentEaters: [],
-    }); // also set state of total
+    });
   }
 
   combineTaxTip() { // on click for Finalize Tax/Tip
@@ -233,19 +219,5 @@ class App extends React.Component {
     );
   }
 }
-
-// redux tutorial
-// build this in redux
-
-// airbnb style guide for all vscode projs
-
-// google api to read text from pictures
-// css modules
-
-// refactor to React-Native
-
-// deploy on heroku -- no db
-// deploy on docker -- no db
-// deploy on aws -- no db
 
 ReactDOM.render(<App />, document.getElementById('app'));
