@@ -59,7 +59,7 @@ Component: TIP TAX INPUTS
 
 Feature Plan:
 --------------
-- allow ~custom~ tip flat rates and percentages
+- allow *custom* tip flat rates and percentages
 - allow reading the tip from the final receipt, for standard 18% or 20&
 - build this in redux
 - api to read text from pictures (OCR)
