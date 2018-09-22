@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Checkbox from './Checkbox';
 
 const ItemEntryFields = (props) => {
   const {
@@ -31,10 +32,7 @@ const ItemEntryFields = (props) => {
           {
             friends.map(friend => (
               <span>
-                <input type="checkbox" key={friend} />
-                <label htmlFor={friend}>
-                  {friend}
-                </label>
+                <Checkbox friend={friend} />
               </span>
             ))
           }
