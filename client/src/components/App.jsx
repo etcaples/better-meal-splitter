@@ -80,7 +80,9 @@ class App extends React.Component {
     });
   }
 
-  /* SELECT-DROP */
+  /*
+    handleFriendChange handles a single consumer name input
+  */
   handleFriendChange(e) {
     this.setState({ friendName: e.target.value });
   }

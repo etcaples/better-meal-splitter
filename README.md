@@ -8,19 +8,15 @@ How the app works (walkthrough + refactor plans):
 Component: ITEM ENTRY FIELDS
 1. user enters all participants, one by one
   - `handleFriendChange` captures the input and stores it temporarily as `friendName`
-  - TODO: the input box shoud only allow nrmal strings
-  - TODO: need to sanitize inputs
   - TODO: make the character max 20
-2. on submit, the name of the current participant (`friendName`) is pushed to the `friends` array, and appears as a checkbox option
-  - when submit button is selected, it fires `handleFriendSubmit`, which pushes the current `friendName` to the `friends` array
-    - this array is currently an array containing only the names of friends -- the purpose of this array is only to render checkboxes
-    - TODO: need the input box to reset to be empty when submit is clicked
-3. TODO: *no click functionality yet on the checkboxes, since I switched from select drop*
-  - when an eater is selected `handleEaterSelect` is fired and that person's name is currently pushed to the `currentEaters` array, which temporarily stores the eaters for the current item
+2. on submit, the `handleFriendSubmit` method is fired
+  - TODO: need the input box to reset to be empty when submit is clicked
+  - the name of the current participant (`friendName`), if unique, is saved as the name property of a new friend object in the array of `friends` and renders as a checkbox option
+3. when an eater's checkbox is selected, `handleEaterSelect` is fired and that person's name is currently pushed to the `currentEaters` array, which temporarily stores the eaters for the current item
   - TODO: handle the case where someone inputs the string 'true'
 4. when an item is input to the item box, `handleItemChange` is fired
   - it stores the item name as `currentItem`
-5. when a price in input in the price box,`handlePriceChange` is fired
+5. when a price is input to the price box,`handlePriceChange` is fired
   - it converts the price to a number and stores it with 2 decimal places as the `currentPrice`
   - TODO: make sure this input only allows number inputs with no more than 2 decimal places
 6. when the submit button is selected for item-price-eaters, the `handleRowSubmit` function is fired
@@ -57,6 +53,7 @@ Component: TIP TAX INPUTS
         - TODO: this can probably be assigned randomly
 13. With `totalAmounts` updated to have datas, this component will render a list of the people and their final totals to pay
 
+
 Feature Plan:
 --------------
 - allow *custom* tip flat rates and percentages
@@ -73,10 +70,9 @@ Feature Plan:
 CH-CH-CHANGES (tech debt/refactor):
 -----------------------------------
 - items should be represented as objects
-- people should be represented as objects
 - components should be conditionally rendered, like a checkout page
   - but allow for back-tracking, eventually
 - allow users to edit specific datas
 - the remove items function needs to not only visually remove the item row, but also decrement the users' subtotals
-- sanitize inputs of tax and tip
+- sanitize inputs of tax and tip (only allow certain types of numbers)
 
