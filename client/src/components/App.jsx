@@ -37,12 +37,6 @@ class App extends React.Component {
     this.handlePageSubmit = this.handlePageSubmit.bind(this);
     this.removeItemRow = this.removeItemRow.bind(this);
   }
-  
-  // Next up:
-    // add functionality to checkboxes:
-      // if button is clicked, console.log('clicked)
-      /// else console.log('unclicked')
-
 
   setTallySubtotals() { // on item details confirmation
     const { allRows, priceTallies, percentages } = this.state;
