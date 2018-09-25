@@ -93,9 +93,19 @@ class App extends React.Component {
 
   handleFriendSubmit() {
     const { friends, friendName } = this.state;
+    const friend = {
+      name: friendName,
+      isChecked: false,
+    };
     const friendsList = [].concat(friends);
-    if (friends.includes(friendName) === false) {
-      friendsList.push(friendName);
+    let doesInclude = false;
+    for (let i = 0; i < friendsList.length; i++) {
+      if (friendsList[i].name === friendName) {
+        doesInclude = true;
+      }
+    }
+    if (doesInclude === false) {
+      friendsList.push(friend);
       this.setState({ friends: friendsList }, () => {
         // reset input to be empty
       });
@@ -116,12 +126,43 @@ class App extends React.Component {
 
   /* CURRENT FRIEND */
   handleEaterSelect(selectedEater) {
-    const { currentEaters } = this.state;
+    const { friends, currentEaters } = this.state;
     const newEaters = [].concat(currentEaters);
-    if (newEaters.includes(selectedEater) === false) {
-      newEaters.push(selectedEater);
+    const friendsList = [].concat(friends);
+    // if (newEaters.includes(selectedEater) === false) {
+    //   newEaters.push(selectedEater);
+    // }
+    // this.setState({ currentEaters: newEaters });
+
+    // iterate over friends
+    for (let i = 0; i < friendsList.length; i++) {
+      const currFriend = friendsList[i];
+      if (currFriend.name === selectedEater) {
+        console.log(selectedEater, ' before: ', currFriend.isChecked);
+        if (currFriend.isChecked === false) {
+          currFriend.isChecked = true;
+        } else {
+          currFriend.isChecked = false;
+        }
+        console.log(selectedEater, ' after: ', currFriend.isChecked);
+      }
     }
-    this.setState({ currentEaters: newEaters });
+    // find the matching friend obj
+    // if isChecked is FALSE
+      // change isChecked to TRUE
+      // push to currentEaters
+    // else
+      // remove from currentEaters
+      this.setState({ friends: friendsList });
+  }
+
+  handleCheckboxClick() { // this is like the handleEaterSelect
+    // return the name of the person
+    // find the person's friend object
+    // change isChecked to true
+    // push current person to currentEaters
+    const that = this;
+    console.log('HIT');
   }
 
   handlePageSubmit() {
