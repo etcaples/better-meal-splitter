@@ -127,42 +127,26 @@ class App extends React.Component {
   /* CURRENT FRIEND */
   handleEaterSelect(selectedEater) {
     const { friends, currentEaters } = this.state;
-    const newEaters = [].concat(currentEaters);
+    const eaters = [].concat(currentEaters);
     const friendsList = [].concat(friends);
-    // if (newEaters.includes(selectedEater) === false) {
-    //   newEaters.push(selectedEater);
-    // }
-    // this.setState({ currentEaters: newEaters });
+    if (eaters.includes(selectedEater) === false) {
+      eaters.push(selectedEater); // add it
+    } else {
+      eaters.splice(eaters.indexOf(selectedEater), 1); // remove it
+    }
 
-    // iterate over friends
     for (let i = 0; i < friendsList.length; i++) {
       const currFriend = friendsList[i];
       if (currFriend.name === selectedEater) {
-        console.log(selectedEater, ' before: ', currFriend.isChecked);
         if (currFriend.isChecked === false) {
           currFriend.isChecked = true;
         } else {
           currFriend.isChecked = false;
         }
-        console.log(selectedEater, ' after: ', currFriend.isChecked);
+        break;
       }
     }
-    // find the matching friend obj
-    // if isChecked is FALSE
-      // change isChecked to TRUE
-      // push to currentEaters
-    // else
-      // remove from currentEaters
-      this.setState({ friends: friendsList });
-  }
-
-  handleCheckboxClick() { // this is like the handleEaterSelect
-    // return the name of the person
-    // find the person's friend object
-    // change isChecked to true
-    // push current person to currentEaters
-    const that = this;
-    console.log('HIT');
+    this.setState({ friends: friendsList, currentEaters: eaters });
   }
 
   handlePageSubmit() {
