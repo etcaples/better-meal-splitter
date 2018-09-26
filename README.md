@@ -69,7 +69,7 @@ Feature Plan:
 
 CH-CH-CHANGES (tech debt/refactor):
 -----------------------------------
-- items should be represented as objects
+- table rendering looks gross
 - components should be conditionally rendered, like a checkout page
   - but allow for back-tracking, eventually
 - allow users to edit specific datas
