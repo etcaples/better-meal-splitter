@@ -9,12 +9,12 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      friendName: '', // the friend to add to select drop
-      friends: [], // all friends, to render checkboxes
+      friendName: '',
+      friends: [], // array of friend objects
       currentItem: '',
       currentPrice: 0,
       currentEaters: [],
-      allRows: [], // array of arrays TODO: change to array of objects
+      items: [], // array of item objects
       priceTallies: {},
       tax: 0,
       tip: 0,
@@ -26,7 +26,7 @@ class App extends React.Component {
     this.handleFriendChange = this.handleFriendChange.bind(this);
     this.handleFriendSubmit = this.handleFriendSubmit.bind(this);
     this.handleEaterSelect = this.handleEaterSelect.bind(this);
-    this.handleRowSubmit = this.handleRowSubmit.bind(this);
+    this.handleItemSubmit = this.handleItemSubmit.bind(this);
     this.handlePriceChange = this.handlePriceChange.bind(this);
     this.handleItemChange = this.handleItemChange.bind(this);
     this.setTallySubtotals = this.setTallySubtotals.bind(this);
@@ -36,6 +36,7 @@ class App extends React.Component {
     this.setIndivPercentages = this.setIndivPercentages.bind(this);
     this.handlePageSubmit = this.handlePageSubmit.bind(this);
     this.removeItemRow = this.removeItemRow.bind(this);
+    this.resetAllCheckboxes = this.resetAllCheckboxes.bind(this);
   }
 
   setTallySubtotals() { // on item details confirmation
@@ -112,8 +113,6 @@ class App extends React.Component {
   handleItemChange(e) {
     this.setState({ currentItem: e.target.value });
   }
-  // on page submit:
-  //   calculate the total for each person
 
   /* CURRENT PRICE */
   handlePriceChange(e) {
@@ -157,23 +156,39 @@ class App extends React.Component {
     this.setState({ totalAmounts: newTotalAmounts });
   }
 
-  handleRowSubmit() {
+  handleItemSubmit() {
     const {
       currentItem,
       currentPrice,
       currentEaters,
-      allRows,
+      items,
       subtotal,
     } = this.state;
-    const newRow = [currentItem, currentPrice, currentEaters];
-    const allRowsTemp = [].concat(allRows);
+    const item = {
+      name: currentItem,
+      price: currentPrice,
+      eaters: currentEaters,
+    };
+    const currItems = [].concat(items);
     const newSubtotal = subtotal + currentPrice;
-    allRowsTemp.push(newRow);
+    currItems.push(item);
     this.setState({
-      allRows: allRowsTemp,
+      items: currItems,
       subtotal: newSubtotal,
       currentEaters: [],
-    });
+    }, () => this.resetAllCheckboxes());
+  }
+
+  resetAllCheckboxes() {
+    const { friends } = this.state;
+    const tempFriends = [].concat(friends);
+    for (let i = 0; i < tempFriends.length; i++) {
+      const friend = tempFriends[i];
+      if (friend.isChecked) {
+        friend.isChecked = false;
+      }
+    }
+    this.setState({ friends: tempFriends });
   }
 
   combineTaxTip() { // on click for Finalize Tax/Tip
@@ -206,7 +221,7 @@ class App extends React.Component {
   render() {
     const {
       friends,
-      allRows,
+      items,
       priceTallies,
       totalAmounts,
     } = this.state;
@@ -221,14 +236,14 @@ class App extends React.Component {
             handleFriendChange={this.handleFriendChange}
             handleFriendSubmit={this.handleFriendSubmit}
             handleEaterSelect={this.handleEaterSelect}
-            handleRowSubmit={this.handleRowSubmit}
+            handleItemSubmit={this.handleItemSubmit}
             handlePriceChange={this.handlePriceChange}
             handleItemChange={this.handleItemChange}
           />
         </div>
         <div>
           <ItemList
-            itemDetails={allRows}
+            itemDetails={items}
             setTallySubtotals={this.setTallySubtotals}
             removeItemRow={this.removeItemRow}
           />

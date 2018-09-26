@@ -21,25 +21,25 @@ const ItemList = (props) => {
         </thead>
         <tbody>
           {
-            itemDetails.map(([item, price, friends]) => (
+            itemDetails.map(({ name, price, eaters }) => (
               <tr>
                 <td>
-                  {item}
+                  {name}
                 </td>
                 <td>
                   {`$${price}`}
                 </td>
                 <td>
-                  {friends.map(friend => (
+                  {eaters.map(eater => (
                     <p>
-                      {friend}
+                      {eater}
                     </p>
                   ))}
                 </td>
                 <td>
-                  <button type="button" onClick={() => removeItemRow([item, price, friends])}>
+                  {/* <button type="button" onClick={() => removeItemRow([item, price, friends])}>
                     Remove
-                  </button>
+                  </button> */}
                 </td>
               </tr>))
           }

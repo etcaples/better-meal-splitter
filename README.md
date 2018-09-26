@@ -12,21 +12,21 @@ Component: ITEM ENTRY FIELDS
 2. on submit, the `handleFriendSubmit` method is fired
   - TODO: need the input box to reset to be empty when submit is clicked
   - the name of the current participant (`friendName`), if unique, is saved as the name property of a new friend object in the array of `friends` and renders as a checkbox option
-3. when an eater's checkbox is selected, `handleEaterSelect` is fired and that person's name is currently pushed to the `currentEaters` array, which temporarily stores the eaters for the current item
+  - the state of the checked property (`isChecked`) is updated for that person
+3. when an eater's checkbox is selected, `handleEaterSelect` is fired 
+  - that person's name is currently pushed to the `currentEaters` array, which temporarily stores the eaters for the current item
   - TODO: handle the case where someone inputs the string 'true'
 4. when an item is input to the item box, `handleItemChange` is fired
   - it stores the item name as `currentItem`
 5. when a price is input to the price box,`handlePriceChange` is fired
   - it converts the price to a number and stores it with 2 decimal places as the `currentPrice`
   - TODO: make sure this input only allows number inputs with no more than 2 decimal places
-6. when the submit button is selected for item-price-eaters, the `handleRowSubmit` function is fired
-  - this takes the `currentItem`, `currentPrice`, and `currentEaters` from state and puts them into a new row-array
-    - TODO: instead, this function should store the `currentEaters` as a value in the item's object
-  - then the new row-array is pushed to the array that stores all the rows of items (`allRows`)
-    - `allRows` is currently an array or arrays, but I think I want to change this to an array of objects -- I'm pretty sure this will make the lookup time faster (TODO)
-  - also, `handleRowSubmit` takes the current `subtotal` and increments it by whatever the `currentPrice` of the item is
+6. when the submit button is selected for item-price-eaters, the `handleItemSubmit` function is fired
+  - this takes the `currentItem`, `currentPrice`, and `currentEaters` from state and puts them into a new item object
+  - then the new item object is pushed to the array that stores all the rows of items (`items`)
+  - also, `handleItemSubmit` takes the current `subtotal` and increments it by whatever the `currentPrice` of the item is
   - then it resets the `currentEaters` to an empty array
-  - TODO: on row submit, reset the checkboxes to be unchecked
+  - finally, it resets the checkboxes to be unchecked
 
 Component: ITEM LIST
 7. the item-price-eaters will be rendered on the page, inside a rough html table

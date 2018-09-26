@@ -10,7 +10,7 @@ const ItemEntryFields = (props) => {
     handleItemChange,
     handlePriceChange,
     handleEaterSelect,
-    handleRowSubmit,
+    handleItemSubmit,
   } = props;
   return (
     <div>
@@ -43,7 +43,7 @@ const ItemEntryFields = (props) => {
         </div>
       </div>
       <div>
-        <button type="button" onClick={() => handleRowSubmit()}>
+        <button type="button" onClick={() => handleItemSubmit()}>
           {'Submit'}
         </button>
       </div>
@@ -56,7 +56,7 @@ ItemEntryFields.propTypes = {
   handleFriendChange: PropTypes.func.isRequired,
   handleFriendSubmit: PropTypes.func.isRequired,
   handleEaterSelect: PropTypes.func.isRequired,
-  handleRowSubmit: PropTypes.func.isRequired,
+  handleItemSubmit: PropTypes.func.isRequired,
   handlePriceChange: PropTypes.func.isRequired,
   handleItemChange: PropTypes.func.isRequired,
 };
