@@ -4,7 +4,7 @@ import TipTaxInputs from './TipTaxInputs';
 
 const SubtotalList = (props) => {
   const {
-    priceTallies,
+    friends,
     getTax,
     getTip,
     combineTaxTip,
@@ -13,10 +13,10 @@ const SubtotalList = (props) => {
   return (
     <div>
       {
-        Object.keys(priceTallies).map(priceTallyKey => (
+        friends.map(friend => (
           <div>
             <ul>
-              {`${priceTallyKey}: $${priceTallies[priceTallyKey].toFixed(2)}`}
+              {`${friend.name}: $${friend.priceTally}`}
             </ul>
           </div>))
       }
@@ -33,7 +33,7 @@ const SubtotalList = (props) => {
 };
 
 SubtotalList.propTypes = {
-  priceTallies: PropTypes.objectOf(PropTypes.number).isRequired,
+  friends: PropTypes.objectOf(PropTypes.any).isRequired,
   getTax: PropTypes.func.isRequired,
   getTip: PropTypes.func.isRequired,
   combineTaxTip: PropTypes.func.isRequired,

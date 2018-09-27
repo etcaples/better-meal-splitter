@@ -15,12 +15,10 @@ class App extends React.Component {
       currentPrice: 0,
       currentEaters: [],
       items: [], // array of item objects
-      priceTallies: {},
       tax: 0,
       tip: 0,
       subtotal: 0,
       total: 0,
-      percentages: {},
       totalAmounts: {},
     };
     this.handleFriendChange = this.handleFriendChange.bind(this);
@@ -40,21 +38,35 @@ class App extends React.Component {
   }
 
   setTallySubtotals() { // on item details confirmation
-    const { allRows, priceTallies, percentages } = this.state;
-    const priceTalliesTemp = Object.assign({}, priceTallies);
-    const percentagesTemp = Object.assign({}, percentages); // empty object
+    const { items, friends } = this.state;
+    const tempFriends = [].concat(friends);
+    const tempItems = [].concat(items);
 
-    for (let i = 0; i < allRows.length; i++) {
-      const friendsArr = allRows[i][2];
-      for (let k = 0; k < friendsArr.length; k++) {
-        if (priceTalliesTemp[friendsArr[k]] === undefined) {
-          priceTalliesTemp[friendsArr[k]] = 0;
-          percentagesTemp[friendsArr[k]] = 0;
+    // iterate over each item object
+    for (let i = 0; i < tempItems.length; i++) {
+      const itemEaters = tempItems[i].eaters;
+      const itemPrice = tempItems[i].price;
+      if (tempItems[i].isNew === true) {
+        // for each eater in the item's `eaters` property,
+        for (let k = 0; k < itemEaters.length; k++) {
+          const currEater = itemEaters[k];
+          // find them in the tempFriends array of objects:
+          // iterate over the array of friend-objects
+          // if the name matches the eater, increment their indiv priceTally
+          for (let j = 0; j < tempFriends.length; j++) {
+            const currFriend = tempFriends[j];
+            if (tempItems[i].isNew === true && currFriend.name === currEater) {
+              // increment their indiv `priceTally`
+              currFriend.priceTally += itemPrice / itemEaters.length;
+            }
+          }
         }
-        priceTalliesTemp[friendsArr[k]] += allRows[i][1] / friendsArr.length;
+        // after you increment all eaters, toggle item.isNew to false
+        tempItems[i].isNew = false;
       }
     }
-    this.setState({ priceTallies: priceTalliesTemp, percentages: percentagesTemp });
+
+    this.setState({ friends: tempFriends, items: tempItems });
   }
 
   getTip(e) {
@@ -93,6 +105,8 @@ class App extends React.Component {
     const friend = {
       name: friendName,
       isChecked: false,
+      priceTally: 0,
+      percentage: 0,
     };
     const friendsList = [].concat(friends);
     let doesInclude = false;
@@ -168,6 +182,7 @@ class App extends React.Component {
       name: currentItem,
       price: currentPrice,
       eaters: currentEaters,
+      isNew: true,
     };
     const currItems = [].concat(items);
     const newSubtotal = subtotal + currentPrice;
@@ -222,7 +237,6 @@ class App extends React.Component {
     const {
       friends,
       items,
-      priceTallies,
       totalAmounts,
     } = this.state;
     return (
@@ -250,7 +264,7 @@ class App extends React.Component {
         </div>
         <div>
           <SubtotalList
-            priceTallies={priceTallies}
+            friends={friends}
             getTax={this.getTax}
             getTip={this.getTip}
             combineTaxTip={this.combineTaxTip}

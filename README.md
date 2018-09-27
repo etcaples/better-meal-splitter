@@ -29,17 +29,18 @@ Component: ITEM ENTRY FIELDS
   - finally, it resets the checkboxes to be unchecked
 
 Component: ITEM LIST
-7. the item-price-eaters will be rendered on the page, inside a rough html table
+<!-- 7. the item-price-eaters will be rendered on the page, inside a rough html table
   - each row has a "remove" button, with a click handler `removeItemRow`
-8. when `removeItemRow` is fired, the target row is removed from the `allRows` array of items
+8. when `removeItemRow` is fired, the target row is removed from the `allRows` array of items -->
 9. when the button is clicked to confirm all the item details are correct, the `setTallySubtotals` method is fired
-  - this looks at each eaters array within each of the item arrays from `allRows` (O(n^2))
-    - for each unique friend name, a price-per-person is initialized in `priceTallies` object
-    - also, a percentage-per-person is initialized in `percentages` object
-    - TODO: the above two bullets should be consolidated more efficiently when there's an array of friends objects and an array of item objects instead of nested arrays
+  - this looks at each eaters array within each of the item objects from `items` (poor time complexity)
+    - for each eater, their corresponding friend-object is found
+    - then that friend's `priceTally` is incrememted the cost of their share of the item's `price`
+  - it only increments indiv `priceTally` if it's a new item addition
 
 Component: SUBTOTAL LIST
-9. Now that there's datas in the `priceTallies` object, the key-value pairs for each person and their subtotal will render altogether
+9. Now that there's datas in the `priceTallies` property,
+  - TODO: the key-value pairs for each person and their subtotal will render altogether
 
 Component: TIP TAX INPUTS
 10. when a tax amount is entered in the tax input, `getTax` is fired and stores the tax temporarily as number in `tax` in state
@@ -75,4 +76,4 @@ CH-CH-CHANGES (tech debt/refactor):
 - allow users to edit specific datas
 - the remove items function needs to not only visually remove the item row, but also decrement the users' subtotals
 - sanitize inputs of tax and tip (only allow certain types of numbers)
-
+- prevent item submission if there's no eaters selected
