@@ -23,12 +23,11 @@ const AddItemInfo = (props) => {
         <div>
           {
             friends.map(friend => (
-              <span>
+              <span key={`${friend.name}-checkbox`}>
                 <Checkbox
                   friend={friend.name}
                   isChecked={friend.isChecked}
                   handleEaterSelect={handleEaterSelect}
-                  key={friend.name}
                 />
               </span>
             ))

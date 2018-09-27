@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import SubtotalList from './SubtotalList';
 import AddTaxTip from './AddTaxTip';
 
-const Stage2 = (props) => {
+const SubtotalSummaryPage = (props) => {
   const {
     friends,
     getTax,
@@ -24,11 +24,11 @@ const Stage2 = (props) => {
   );
 };
 
-Stage2.propTypes = {
+SubtotalSummaryPage.propTypes = {
   friends: PropTypes.arrayOf(PropTypes.object).isRequired,
   getTax: PropTypes.func.isRequired,
   getTip: PropTypes.func.isRequired,
   combineTaxTip: PropTypes.func.isRequired,
 };
 
-export default Stage2;
+export default SubtotalSummaryPage;

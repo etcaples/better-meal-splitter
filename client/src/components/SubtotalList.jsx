@@ -9,9 +9,9 @@ const SubtotalList = (props) => {
     <div>
       {
         friends.map(friend => (
-          <div>
+          <div key={`${friend.name}-subtotal`}>
             <ul>
-              {`${friend.name}: $${friend.priceTally}`}
+              {`${friend.name}: $${friend.subtotalTally}`}
             </ul>
           </div>))
       }

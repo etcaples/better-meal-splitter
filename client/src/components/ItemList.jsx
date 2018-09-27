@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ItemList = (props) => {
-  const { itemDetails, removeItemRow } = props;
+  const {
+    itemDetails,
+    // removeItemRow,
+  } = props;
+  let itemCount = 0;
   return (
     <div>
       <table>
@@ -21,27 +25,30 @@ const ItemList = (props) => {
         </thead>
         <tbody>
           {
-            itemDetails.map(({ name, price, eaters }) => (
-              <tr>
-                <td>
-                  {name}
-                </td>
-                <td>
-                  {`$${price}`}
-                </td>
-                <td>
-                  {eaters.map(eater => (
-                    <p>
-                      {eater}
-                    </p>
-                  ))}
-                </td>
-                <td>
-                  {/* <button type="button" onClick={() => removeItemRow([item, price, friends])}>
-                    Remove
-                  </button> */}
-                </td>
-              </tr>))
+            itemDetails.map(({ name, price, eaters }) => {
+              itemCount += 1;
+              return (
+                <tr key={`item${itemCount}`}>
+                  <td>
+                    {name}
+                  </td>
+                  <td>
+                    {`$${price}`}
+                  </td>
+                  <td>
+                    {eaters.map(eater => (
+                      <p>
+                        {eater}
+                      </p>
+                    ))}
+                  </td>
+                  <td>
+                    {/* <button type="button" onClick={() => removeItemRow([item, price, friends])}>
+                      Remove
+                    </button> */}
+                  </td>
+                </tr>);
+            })
           }
         </tbody>
       </table>
@@ -51,7 +58,7 @@ const ItemList = (props) => {
 
 ItemList.propTypes = {
   itemDetails: PropTypes.arrayOf(PropTypes.any).isRequired,
-  removeItemRow: PropTypes.func.isRequired,
+  // removeItemRow: PropTypes.func.isRequired,
 };
 
 export default ItemList;

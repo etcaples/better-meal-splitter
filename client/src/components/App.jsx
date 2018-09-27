@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import InitPage from './InitPage';
-import Stage2 from './Stage2';
+import SubtotalSummaryPage from './SubtotalSummaryPage';
 import TotalAmountOwedList from './TotalAmountOwedList';
 import '../css/main.css';
 
@@ -52,12 +52,12 @@ class App extends React.Component {
           const currEater = itemEaters[k];
           // find them in the tempFriends array of objects:
           // iterate over the array of friend-objects
-          // if the name matches the eater, increment their indiv priceTally
+          // if the name matches the eater, increment their indiv subtotalTally
           for (let j = 0; j < tempFriends.length; j++) {
             const currFriend = tempFriends[j];
             if (tempItems[i].isNew === true && currFriend.name === currEater) {
-              // increment their indiv `priceTally`
-              currFriend.priceTally += itemPrice / itemEaters.length;
+              // increment their indiv `subtotalTally`
+              currFriend.subtotalTally += itemPrice / itemEaters.length;
             }
           }
         }
@@ -105,7 +105,7 @@ class App extends React.Component {
     const friend = {
       name: friendName,
       isChecked: false,
-      priceTally: 0,
+      subtotalTally: 0,
       percentage: 0,
     };
     const friendsList = [].concat(friends);
@@ -244,7 +244,7 @@ class App extends React.Component {
           {'SplitMeal'}
         </h1>
         <div>
-          {/* View 1 */}
+          {/* View 1 - manual entry */}
           <InitPage
             friends={friends}
             itemDetails={items}
@@ -259,7 +259,7 @@ class App extends React.Component {
         </div>
         <div>
           {/* View 2 */}
-          <Stage2
+          <SubtotalSummaryPage
             friends={friends}
             getTax={this.getTax}
             getTip={this.getTip}
