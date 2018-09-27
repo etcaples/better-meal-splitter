@@ -1,18 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Checkbox from './Checkbox';
 import AddFriend from './AddFriend';
+import AddItemInfo from './AddItemInfo';
+import ItemList from './ItemList';
+import TallyIndivSubtotals from './TallyIndivSubtotals';
 
 const ItemEntryFields = (props) => {
   const {
     friends,
+    itemDetails,
     handleFriendChange,
     handleFriendSubmit,
     handleItemChange,
     handlePriceChange,
     handleEaterSelect,
     handleItemSubmit,
-    resetInput,
+    setTallySubtotals,
   } = props;
   return (
     <div>
@@ -20,45 +23,31 @@ const ItemEntryFields = (props) => {
         handleFriendChange={handleFriendChange}
         handleFriendSubmit={handleFriendSubmit}
       />
-      <h4>
-        {'Manual entry...'}
-      </h4>
-      <div>
-        <input placeholder="item" onChange={e => handleItemChange(e)} />
-        {'$'}
-        <input placeholder="price" onChange={e => handlePriceChange(e)} />
-        <div>
-          {
-            friends.map(friend => (
-              <span>
-                <Checkbox
-                  friend={friend.name}
-                  isChecked={friend.isChecked}
-                  handleEaterSelect={handleEaterSelect}
-                  key={friend.name}
-                />
-              </span>
-            ))
-          }
-        </div>
-      </div>
-      <div>
-        <button type="button" onClick={() => handleItemSubmit()}>
-          {'Submit'}
-        </button>
-      </div>
+      <AddItemInfo
+        friends={friends}
+        handleItemChange={handleItemChange}
+        handlePriceChange={handlePriceChange}
+        handleEaterSelect={handleEaterSelect}
+        handleItemSubmit={handleItemSubmit}
+      />
+      <ItemList
+        itemDetails={itemDetails}
+      />
+      <TallyIndivSubtotals setTallySubtotals={setTallySubtotals} />
     </div>
   );
 };
 
 ItemEntryFields.propTypes = {
   friends: PropTypes.arrayOf(PropTypes.object).isRequired,
+  itemDetails: PropTypes.arrayOf(PropTypes.object).isRequired,
   handleFriendChange: PropTypes.func.isRequired,
   handleFriendSubmit: PropTypes.func.isRequired,
   handleEaterSelect: PropTypes.func.isRequired,
   handleItemSubmit: PropTypes.func.isRequired,
   handlePriceChange: PropTypes.func.isRequired,
   handleItemChange: PropTypes.func.isRequired,
+  setTallySubtotals: PropTypes.func.isRequired,
 };
 
 export default ItemEntryFields;

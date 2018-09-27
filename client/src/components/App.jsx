@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import InitPage from './InitPage';
-import ItemList from './ItemList';
-import SubtotalList from './SubtotalList';
+import Stage2 from './Stage2';
 import TotalAmountOwedList from './TotalAmountOwedList';
 import '../css/main.css';
 
@@ -248,24 +247,19 @@ class App extends React.Component {
           {/* View 1 */}
           <InitPage
             friends={friends}
+            itemDetails={items}
             handleFriendChange={this.handleFriendChange}
             handleFriendSubmit={this.handleFriendSubmit}
             handleEaterSelect={this.handleEaterSelect}
             handleItemSubmit={this.handleItemSubmit}
             handlePriceChange={this.handlePriceChange}
             handleItemChange={this.handleItemChange}
-          />
-        </div>
-        <div>
-          <ItemList
-            itemDetails={items}
             setTallySubtotals={this.setTallySubtotals}
-            removeItemRow={this.removeItemRow}
           />
         </div>
         <div>
           {/* View 2 */}
-          <SubtotalList
+          <Stage2
             friends={friends}
             getTax={this.getTax}
             getTip={this.getTip}

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const TaxTipInputs = (props) => {
+const AddTaxTip = (props) => {
   const {
     getTax,
     getTip,
@@ -24,10 +24,10 @@ const TaxTipInputs = (props) => {
   );
 };
 
-TaxTipInputs.propTypes = {
+AddTaxTip.propTypes = {
   getTax: PropTypes.func.isRequired,
   getTip: PropTypes.func.isRequired,
   combineTaxTip: PropTypes.func.isRequired,
 };
 
-export default TaxTipInputs;
+export default AddTaxTip;
