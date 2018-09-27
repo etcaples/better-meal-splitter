@@ -20,18 +20,7 @@ const TaxTipInputs = (props) => {
         <button onClick={() => combineTaxTip()} type="button">
           Finalize Tax/Tip
         </button>
-        <div>
-          {
-            Object.keys(totalAmounts).map((person) => {
-              let count = 0;
-              count += 1;
-              return (
-                <ul key={count}>
-                  {`${person}: $${totalAmounts[person]}`}
-                </ul>);
-            })
-          }
-        </div>
+        <TotalAmountOwedList />
       </div>
     </div>
   );

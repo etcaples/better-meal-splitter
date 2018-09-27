@@ -33,7 +33,7 @@ const SubtotalList = (props) => {
 };
 
 SubtotalList.propTypes = {
-  friends: PropTypes.objectOf(PropTypes.any).isRequired,
+  friends: PropTypes.arrayOf(PropTypes.object).isRequired,
   getTax: PropTypes.func.isRequired,
   getTip: PropTypes.func.isRequired,
   combineTaxTip: PropTypes.func.isRequired,

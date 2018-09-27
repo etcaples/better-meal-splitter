@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import ItemEntryFields from './ItemEntryFields';
 import ItemList from './ItemList';
 import SubtotalList from './SubtotalList';
+import TotalAmountOwedList from './TotalAmountOwedList';
 import '../css/main.css';
 
 class App extends React.Component {
@@ -237,7 +238,6 @@ class App extends React.Component {
     const {
       friends,
       items,
-      totalAmounts,
     } = this.state;
     return (
       <div className="app-body">
@@ -268,8 +268,10 @@ class App extends React.Component {
             getTax={this.getTax}
             getTip={this.getTip}
             combineTaxTip={this.combineTaxTip}
-            totalAmounts={totalAmounts}
           />
+        </div>
+        <div>
+          <TotalAmountOwedList friends={friends} />
         </div>
       </div>
     );

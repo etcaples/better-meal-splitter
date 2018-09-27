@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Checkbox from './Checkbox';
+import AddFriend from './AddFriend';
 
 const ItemEntryFields = (props) => {
   const {
@@ -11,15 +12,14 @@ const ItemEntryFields = (props) => {
     handlePriceChange,
     handleEaterSelect,
     handleItemSubmit,
+    resetInput,
   } = props;
   return (
     <div>
-      <div className="friend-add-div">
-        <input onChange={e => handleFriendChange(e)} placeholder="Add friend..." />
-        <button type="button" onClick={() => handleFriendSubmit()}>
-          Submit
-        </button>
-      </div>
+      <AddFriend
+        handleFriendChange={handleFriendChange}
+        handleFriendSubmit={handleFriendSubmit}
+      />
       <h4>
         {'Manual entry...'}
       </h4>
@@ -52,7 +52,7 @@ const ItemEntryFields = (props) => {
 };
 
 ItemEntryFields.propTypes = {
-  friends: PropTypes.arrayOf(PropTypes.string).isRequired,
+  friends: PropTypes.arrayOf(PropTypes.object).isRequired,
   handleFriendChange: PropTypes.func.isRequired,
   handleFriendSubmit: PropTypes.func.isRequired,
   handleEaterSelect: PropTypes.func.isRequired,
