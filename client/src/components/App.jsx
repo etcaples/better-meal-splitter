@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ItemEntryFields from './ItemEntryFields';
+import InitPage from './InitPage';
 import ItemList from './ItemList';
 import SubtotalList from './SubtotalList';
 import TotalAmountOwedList from './TotalAmountOwedList';
@@ -245,7 +245,8 @@ class App extends React.Component {
           {'SplitMeal'}
         </h1>
         <div>
-          <ItemEntryFields
+          {/* View 1 */}
+          <InitPage
             friends={friends}
             handleFriendChange={this.handleFriendChange}
             handleFriendSubmit={this.handleFriendSubmit}
@@ -263,6 +264,7 @@ class App extends React.Component {
           />
         </div>
         <div>
+          {/* View 2 */}
           <SubtotalList
             friends={friends}
             getTax={this.getTax}
@@ -271,6 +273,7 @@ class App extends React.Component {
           />
         </div>
         <div>
+          {/* View 3 */}
           <TotalAmountOwedList friends={friends} />
         </div>
       </div>
