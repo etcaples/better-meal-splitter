@@ -9,17 +9,17 @@ const AddTaxTip = (props) => {
   } = props;
   return (
     <div>
-      <div>
-        <input onChange={e => getTax(e)} placeholder="add tax & other fees..." />
-      </div>
-      <div>
-        <input onChange={e => getTip(e)} placeholder="add tip..." />
-      </div>
-      <div>
-        <button onClick={() => combineTaxTip()} type="button">
-          Finalize Tax/Tip
-        </button>
-      </div>
+      <form>
+        <div>
+          <input onChange={e => getTax(e)} placeholder="add tax & other fees..." />
+        </div>
+        <div>
+          <input onChange={e => getTip(e)} placeholder="add tip..." />
+        </div>
+        <div>
+          <input type="reset" value="Finalize Tax/Tip" onClick={() => combineTaxTip()} />
+        </div>
+      </form>
     </div>
   );
 };

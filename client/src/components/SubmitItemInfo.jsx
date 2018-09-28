@@ -6,9 +6,7 @@ const SubmitItemInfo = (props) => {
     handleItemSubmit,
   } = props;
   return (
-    <button type="button" onClick={() => handleItemSubmit()}>
-      {'Submit'}
-    </button>
+    <input type="reset" value="Submit" onClick={() => handleItemSubmit()} />
   );
 };
 

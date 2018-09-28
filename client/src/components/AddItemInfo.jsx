@@ -17,25 +17,27 @@ const AddItemInfo = (props) => {
         {'Manual entry...'}
       </h4>
       <div>
-        <input placeholder="item" onChange={e => handleItemChange(e)} />
-        {'$'}
-        <input placeholder="price" onChange={e => handlePriceChange(e)} />
-        <div>
-          {
-            friends.map(friend => (
-              <span key={`${friend.name}-checkbox`}>
-                <Checkbox
-                  friend={friend.name}
-                  isChecked={friend.isChecked}
-                  handleEaterSelect={handleEaterSelect}
-                />
-              </span>
-            ))
-          }
-        </div>
-        <div>
-          <SubmitItemInfo handleItemSubmit={handleItemSubmit} />
-        </div>
+        <form>
+          <input placeholder="item" onChange={e => handleItemChange(e)} />
+          {'$'}
+          <input placeholder="price" onChange={e => handlePriceChange(e)} />
+          <div>
+            {
+              friends.map(friend => (
+                <span key={`${friend.name}-checkbox`}>
+                  <Checkbox
+                    friend={friend.name}
+                    isChecked={friend.isChecked}
+                    handleEaterSelect={handleEaterSelect}
+                  />
+                </span>
+              ))
+            }
+          </div>
+          <div>
+            <SubmitItemInfo handleItemSubmit={handleItemSubmit} />
+          </div>
+        </form>
       </div>
     </div>
   );

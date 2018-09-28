@@ -8,10 +8,10 @@ const AddFriend = (props) => {
   } = props;
   return (
     <div className="friend-add-div">
-      <input onChange={e => handleFriendChange(e)} placeholder="Add friend..." />
-      <button type="button" onClick={() => handleFriendSubmit()}>
-      Submit
-      </button>
+      <form>
+        <input onChange={e => handleFriendChange(e)} placeholder="Add friend..." />
+        <input type="reset" value="Submit" onClick={() => handleFriendSubmit()} />
+      </form>
     </div>
   );
 };
