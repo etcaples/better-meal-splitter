@@ -75,7 +75,7 @@ CH-CH-CHANGES (tech debt/refactor):
 - allow users to edit specific datas
 - the remove items function needs to not only visually remove the item row, but also decrement the users' subtotals
 - sanitize inputs of tax and tip (only allow certain types of numbers)
+  - make sure only numbers are added for tax/tip -- maybe an npm module for input?
 - prevent item submission if there's no eaters selected
 - don't allow empty string inputs for username
 - don't allow empty strings for tax/tip (unless you handle that case and default it to 0)
-- make sure only numbers are added for tax/tip -- maybe an npm module for input?
