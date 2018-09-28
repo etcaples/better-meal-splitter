@@ -8,14 +8,10 @@ const AmountOwedList = (props) => {
   return (
     <div>
       {
-        Object.keys(friends).map((friend) => {
-          let count = 0;
-          count += 1;
-          return (
-            <ul key={count}>
-              {`${friend.name}: $${friend.total}`}
-            </ul>);
-        })
+        friends.map(friend => (
+          <ul key={`${friend.name}-total`}>
+            {`${friend.name}: $${friend.totalTally}`}
+          </ul>))
       }
     </div>
   );

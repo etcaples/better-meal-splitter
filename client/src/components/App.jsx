@@ -19,7 +19,6 @@ class App extends React.Component {
       tip: 0,
       subtotal: 0,
       total: 0,
-      totalAmounts: {},
     };
     this.handleFriendChange = this.handleFriendChange.bind(this);
     this.handleFriendSubmit = this.handleFriendSubmit.bind(this);
@@ -79,16 +78,15 @@ class App extends React.Component {
 
   setIndivPercentages() {
     const {
-      percentages,
       friends,
-      priceTallies,
       subtotal,
     } = this.state;
-    const newPercentages = Object.assign({}, percentages);
-    for (let i = 0; i < friends.length; i++) {
-      newPercentages[friends[i]] = priceTallies[friends[i]] / subtotal;
+    const tempFriends = [].concat(friends);
+    for (let i = 0; i < tempFriends.length; i++) {
+      const currFriend = tempFriends[i];
+      currFriend.percentage = currFriend.subtotalTally / subtotal;
     }
-    this.setState({ percentages: newPercentages }, () => {
+    this.setState({ friends: tempFriends }, () => {
       this.handlePageSubmit();
     });
   }
@@ -106,6 +104,7 @@ class App extends React.Component {
       name: friendName,
       isChecked: false,
       subtotalTally: 0,
+      totalTally: 0,
       percentage: 0,
     };
     const friendsList = [].concat(friends);
@@ -160,14 +159,13 @@ class App extends React.Component {
 
   handlePageSubmit() {
     // renders dollar amounts per person:
-    const { percentages, total, totalAmounts } = this.state;
-    const newTotalAmounts = Object.assign({}, totalAmounts);
-    const consumers = Object.keys(percentages);
-    for (let i = 0; i < consumers.length; i++) {
-      const percentage = percentages[consumers[i]];
-      newTotalAmounts[consumers[i]] = (percentage * total).toFixed(2);
+    const { total, friends } = this.state;
+    const tempFriends = [].concat(friends);
+    for (let i = 0; i < tempFriends.length; i++) {
+      const currFriend = tempFriends[i];
+      currFriend.totalTally = (currFriend.percentage * total).toFixed(2);
     }
-    this.setState({ totalAmounts: newTotalAmounts });
+    this.setState({ friends: tempFriends });
   }
 
   handleItemSubmit() {
