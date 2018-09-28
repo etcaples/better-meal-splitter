@@ -39,8 +39,7 @@ Component: ITEM LIST
   - it only increments indiv `priceTally` if it's a new item addition
 
 Component: SUBTOTAL LIST
-9. Now that there's datas in the `priceTallies` property,
-  - TODO: the key-value pairs for each person and their subtotal will render altogether
+
 
 Component: TIP TAX INPUTS
 10. when a tax amount is entered in the tax input, `getTax` is fired and stores the tax temporarily as number in `tax` in state
@@ -48,7 +47,7 @@ Component: TIP TAX INPUTS
 12. When the button is clicked to finalize the tax and tip, `combineTaxTip` is fired
   - the `tax` and `tip` are added to the `subtotal`, and saved as the `total`
   - after the `total` is set, `setIndivPercentages` is fired
-    - when `setIndivPercentages` is fired, it updated the value of eah participant in the `percentages` object (this amount is the price for that person, divided by the `subtotal`)
+    - when `setIndivPercentages` is fired, it updates the value of each participant in the `percentages` object (this amount is the price for that person, divided by the `subtotal`)
     - then `handlePageSubmit` fires and creates a key-value pair in the `totalAmounts` object, which stores the person's name as the key, and the person's `percentage` * the `total`, fixed to 2 decimals
       - TODO: also render any leftover change remaining (probably whoever is the unlucky penny pays the unlucky penny)
         - TODO: this can probably be assigned randomly
@@ -77,3 +76,6 @@ CH-CH-CHANGES (tech debt/refactor):
 - the remove items function needs to not only visually remove the item row, but also decrement the users' subtotals
 - sanitize inputs of tax and tip (only allow certain types of numbers)
 - prevent item submission if there's no eaters selected
+- don't allow empty string inputs for username
+- don't allow empty strings for tax/tip (unless you handle that case and default it to 0)
+- make sure only numbers are added for tax/tip -- maybe an npm module for input?
